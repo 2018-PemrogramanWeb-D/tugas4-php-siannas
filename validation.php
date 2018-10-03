@@ -7,13 +7,14 @@
         $waktu = "";
         
         if(isset($_SESSION["logged-in"])){
-            $jam = localtime('2', true);
+            $jam = (int)date("H");
             
-            if($jam >= 4 && $jam<10){
-                $waktu = "pagi";  
-            }else if($jam >= 10 && $jam<3){
+            if($jam>=4 && $jam<10){
+                $waktu = "pagi";      
+            }
+            else if($jam >= 10 && $jam<15){
                 $waktu = "siang";  
-            }else if($jam >= 3 && $jam<6){
+            }else if($jam >= 15 && $jam<18){
                 $waktu = "sore";  
             }else{
                 $waktu = "malam";
@@ -47,6 +48,7 @@
                         $wrong = "true";
                     }else{
                         $_SESSION["name"] = $name;
+                        unset($_SESSION["errName"]);
                     }
                 }
                 
@@ -58,6 +60,8 @@
                     if(strlen($pass)<8){
                         $_SESSION["errPass"] = "password minimal 8 karakter";
                         $wrong = "true";
+                    }else{
+                        unset($_SESSION["errPass"]);
                     }
                 }
                 
